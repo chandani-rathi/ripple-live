@@ -252,7 +252,7 @@ const useEditable = (
 
     effect(() => {
       const element = untrack(() => @elementRef);
-      console.log("state connected", element);
+      console.log("state connected");
       
 
       if(!element || opts.disabled) return;
@@ -274,7 +274,7 @@ const useEditable = (
 
     effect(() => {
       const element = @elementRef;
-      console.log("connected");
+      console.log("events connected");
       if (!element || opts.disabled) {
         state.history.length = 0;
         state.historyAt = -1;

@@ -1,16 +1,23 @@
 import { track } from "ripple";
 import { LiveProvider, LiveEditor, LivePreview } from "ripple-live"
 
+component Button({children, ...props}) {
+	<button {...props}>
+		<@children />
+	</button>
+}
+
 export component App() {
 	const code = track(`
 <h3 class="text-xl font-semibold text-white bg-blue-800 rounded-lg p-1">
   {"Hello World! 👋"}
 </h3>
+<Button class="bg-black px-4 py-2 my-4 text-white hover:bg-blue-600">{"Blue button"}</Button>
 	`);
 	
 	<div class="h-screen p-4 flex">
 		<div class="flex-1 grid grid-cols-3 gap-2">
-			<LiveProvider {code} scope={{  }} disabled>
+			<LiveProvider {code} scope={{ Button  }} disabled>
 				<div class="col-span-3 grid grid-cols-1 gap-4">
 					<LivePreview class="h-full" />
 					<LiveEditor class="font-mono  *:rounded-lg *:p-2 *:overflow-auto *:h-full" />
