@@ -13,9 +13,7 @@
 		"test": "pnpm dlx npm-run-all2 --parallel test:**",
 		"build" : "pnpm --filter ripple-live run build",
 		"patch:lib": "cd packages/ripple-live && npm run patch",
-		"patch": "pnpm dlx npm-run-all2 --parallel patch:**",
-		"publish:lib": "cd packages/ripple-live && npm run publish",
-		"publish": "pnpm dlx npm-run-all2 --parallel publish:**"
+		"patch": "pnpm dlx npm-run-all2 --parallel patch:**"
 	},
 	"license": "MIT",
 	"devDependencies": {
