@@ -28,7 +28,7 @@
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"patch": "npm version patch",
-		"publish": "npm publish"
+		"release": "npm publish"
 	},
 	"license": "MIT",
 	"devDependencies": {
