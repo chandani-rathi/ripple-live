@@ -1,4 +1,4 @@
 
 export component MyLib() {
-	<div>{"My Ripple Lib!"}</div>
+	<div>{"My ripple live!"}</div>
 }

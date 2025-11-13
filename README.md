@@ -1,7 +1,7 @@
 
-# Ripple Lib Workspace Template
+# Ripple Live Workspace Template
 
-Starter monorepo template for building Ripple libraries and apps with TypeScript and Vite. Includes:
+Starter monorepo template for building Ripple Live and sample app with TypeScript and Vite. Includes:
 
 - A library package scaffold in `packages/ripple-live`
 - Example/test app(s) in `apps/` that consume the library locally
