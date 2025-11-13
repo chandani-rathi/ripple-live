@@ -1,0 +1,40 @@
+{
+	"name": "ripple-live",
+	"version": "0.0.1",
+	"description": "",
+	"type": "module",
+	"module": "dist/ripple-live.es.js",
+	"main": "dist/ripple-live.cjs.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/ripple-live.es.js",
+			"require": "./dist/ripple-live.cjs.js"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"scripts": {
+		"build": "vite build",
+		"watch": "vite build --watch",
+		"dts": "vite build -c vite.config.dts.js",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"patch": "npm version patch",
+		"publish": "npm publish"
+	},
+	"license": "MIT",
+	"devDependencies": {
+    	
+	},
+	"dependencies": {
+		"ripple": "latest"
+	}
+}
