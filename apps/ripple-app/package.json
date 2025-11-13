@@ -20,7 +20,8 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@tailwindcss/vite": "^4.1.17",
-		"tailwindcss": "^4.1.17"
+		"tailwindcss": "^4.1.17",
+		"vite-plugin-node-polyfills": "^0.24.0"
 	},
 	"dependencies": {
 		"ripple": "latest",

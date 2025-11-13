@@ -1,4 +1,0 @@
-
-export component MyLib() {
-	<div>{"My ripple live!"}</div>
-}

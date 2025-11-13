@@ -1,0 +1,23 @@
+import LiveContext from "./LiveContext.ripple";
+
+component Preview(){
+  const { Component, onError } = LiveContext.get();
+  try {
+    if (@Component) {
+      <@Component />
+    }
+  } catch (e) {
+      const error = onError ? e?.toString(): onError(e);
+      if(error) {
+        <div>{error}</div>
+      }
+  }
+}
+
+export component LivePreview({ children: Children, ...rest }) {
+  <div {...rest}>
+    <Preview />
+    <@Children />
+  </div>
+}
+LivePreview.displayName = "LivePreview";

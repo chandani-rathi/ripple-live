@@ -32,7 +32,9 @@
 	},
 	"license": "MIT",
 	"devDependencies": {
-    	
+    	"@ripple-ts/vscode-plugin": "latest",
+		"shiki": "^3.15.0",
+		"vite-plugin-node-polyfills": "^0.24.0"
 	},
 	"dependencies": {
 		"ripple": "latest"

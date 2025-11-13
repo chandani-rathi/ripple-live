@@ -1,10 +1,14 @@
 import { defineConfig } from 'vite';
 import { ripple } from '@ripple-ts/vite-plugin';
 import path from 'node:path';
-import dtsPlugin from 'vite-plugin-dts';
+import dtsPlugin from 'vite-plugin-dts'; 
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
 	plugins: [
+		nodePolyfills({ 
+			 protocolImports: true,
+		}),
 		ripple(),
 		dtsPlugin({
 			entryRoot: 'src',
@@ -18,7 +22,6 @@ export default defineConfig({
 		},
 	},
 	build: {
-		target: 'esnext',
 		manifest: false,
 		minify: false,
 		lib: {
@@ -33,7 +36,7 @@ export default defineConfig({
 				globals: {},
 				exports: 'named',
 			},
-			external: ['ripple', 'ripple/internal/client'],
+			external: ['ripple', 'ripple/internal/client', 'ripple/compiler'],
 			plugins: [],
 		},
 	},

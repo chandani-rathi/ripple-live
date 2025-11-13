@@ -1,0 +1,32 @@
+import { track, effect, untrack } from "ripple";
+import { highlightCode } from "./highlighter";
+import useEditable from "./useEditable.ripple";
+
+export component CodeEditor({ code, disabled, options = {}, ...editorProps }){
+    const editorRef = track("",undefined, n => {
+        useEditable(n, (text: string) => {
+                const t = text.slice(0, -1);
+                untrack(() => {
+                    @code = t;
+                })
+        }, {
+            @disabled
+        });
+        return n;
+    });
+    const editorContent = track("");
+    const loading = track(false);
+
+    effect(() => {
+        //@loading = true;
+        highlightCode(@code.trim(), @options).then((html) => {
+            @editorContent = html;
+            //@loading = false;
+        });
+    });
+
+    <div {ref n =>  @editorRef=untrack(() => n)} {...editorProps} 
+        contenteditable={!@loading && !@disabled}>
+        {html @editorContent}
+    </div>
+}

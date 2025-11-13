@@ -1,0 +1,13 @@
+import { track, effect } from "ripple";
+import { generateElement } from "./utils/transpile";
+import LiveContext from "./LiveContext.ripple";
+
+export component LiveProvider({ code, scope, disabled, onChange, onError, children }){
+  const Component = track(undefined);
+  LiveContext.set({ code, disabled, scope, onChange, onError, Component });
+  effect(() => {
+    @Component = generateElement({@code, @scope});
+  });
+  <@children />
+}
+LiveProvider.displayName = "LiveProvider";
