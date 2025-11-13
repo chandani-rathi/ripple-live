@@ -1,7 +1,7 @@
 {
 	"name": "ripple-live-workspace",
 	"version": "0.0.1",
-	"private": true,
+	"private": false,
 	"description": "",
 	"type": "module",
 	"scripts": {
