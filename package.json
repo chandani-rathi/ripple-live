@@ -10,12 +10,12 @@
 		"dev": "pnpm dlx npm-run-all2 --parallel watch:**",
 		"test:lib": "pnpm --filter ripple-live run test",
 		"test:app": "pnpm --filter ripple-app run test",
-		"test": "npx npm-run-all2 --parallel test:**",
+		"test": "pnpm dlx npm-run-all2 --parallel test:**",
 		"build" : "pnpm --filter ripple-live run build",
 		"patch:lib": "cd packages/ripple-live && npm run patch",
-		"patch": "npx npm-run-all2 --parallel patch:**",
+		"patch": "pnpm dlx npm-run-all2 --parallel patch:**",
 		"publish:lib": "cd packages/ripple-live && npm run publish",
-		"publish": "npx npm-run-all2 --parallel publish:**"
+		"publish": "pnpm dlx npm-run-all2 --parallel publish:**"
 	},
 	"license": "MIT",
 	"devDependencies": {
