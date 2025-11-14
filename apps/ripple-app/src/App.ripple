@@ -1,28 +1,209 @@
 import { track } from "ripple";
 import { LiveProvider, LiveEditor, LivePreview } from "ripple-live"
 
-component Button({children, ...props}) {
-	<button {...props}>
-		<@children />
-	</button>
-}
-
 export component App() {
-	const code = track(`
-<h3 class="text-xl font-semibold text-white bg-blue-800 rounded-lg p-1">
-  {"Hello World! 👋"}
-</h3>
-<Button class="bg-black px-4 py-2 my-4 text-white hover:bg-blue-600">{"Blue button"}</Button>
-	`);
-	
-	<div class="h-screen p-4 flex">
-		<div class="flex-1 grid grid-cols-3 gap-2">
-			<LiveProvider {code} scope={{ Button  }} disabled>
-				<div class="col-span-3 grid grid-cols-1 gap-4">
-					<LivePreview class="h-full" />
-					<LiveEditor class="font-mono  *:rounded-lg *:p-2 *:overflow-auto *:h-full" />
+
+	const list = [
+		{
+			title: "Button",
+			code: `
+			component Button({children, ...props}) {
+				<button {...props}>
+					<@children />
+				</button>
+			}
+
+			<Button class="bg-black px-4 py-2 text-white hover:bg-blue-600">{"Blue button"}</Button>
+			`,
+		},
+
+		{
+			title: "Hello",
+			code: `
+			<h3 class="text-xl font-semibold text-white bg-blue-800 rounded-lg p-1">
+				{"Hello World! 👋"}
+			</h3>
+			`,
+		},
+
+		{
+			title: "Login Form",
+			code: `
+			<div class="max-w-md mx-auto bg-white rounded-lg p-6 shadow">
+				<h3 class="text-xl font-semibold mb-4">{"Sign in to your account"}</h3>
+				<form onSubmit={e => e.preventDefault()}>
+					<label class="block text-sm mb-1">{"Email"}</label>
+					<input class="w-full mb-3 px-3 py-2 border rounded" placeholder="you@domain.com" />
+					<label class="block text-sm mb-1">{"Password"}</label>
+					<input type="password" class="w-full mb-4 px-3 py-2 border rounded" placeholder="••••••" />
+					<button class="w-full bg-blue-600 text-white py-2 rounded">{"Sign in"}</button>
+				</form>
+			</div>
+			`,
+		},
+
+		{
+			title: "Register Form",
+			code: `
+			<div class="max-w-lg mx-auto bg-white rounded-lg p-6 shadow">
+				<h3 class="text-xl font-semibold mb-4">{"Create account"}</h3>
+				<form onSubmit={e => e.preventDefault()}>
+					<div class="grid grid-cols-2 gap-2 mb-3">
+						<input class="px-3 py-2 border rounded" placeholder="First name" />
+						<input class="px-3 py-2 border rounded" placeholder="Last name" />
+					</div>
+					<input class="w-full mb-3 px-3 py-2 border rounded" placeholder="Email" />
+					<input type="password" class="w-full mb-4 px-3 py-2 border rounded" placeholder="Password" />
+					<button class="w-full bg-green-600 text-white py-2 rounded">{"Register"}</button>
+				</form>
+			</div>
+			`,
+		},
+
+		{
+			title: "Card",
+			code: `
+			<div class="bg-white rounded-lg shadow p-4 w-full">
+				<div class="flex items-center gap-4">
+					<div class="w-14 h-14 bg-slate-200 rounded-full" />
+					<div>
+						<div class="font-semibold">{"Product title"}</div>
+						<div class="text-sm text-slate-500">{"Short description goes here"}</div>
+					</div>
 				</div>
-			</LiveProvider>
+				<div class="mt-3">
+					<p class="text-sm">{"Price: $19.99"}</p>
+					<button class="mt-3 bg-blue-600 text-white px-3 py-1 rounded">{"Buy"}</button>
+				</div>
+			</div>
+			`,
+		},
+
+		{
+			title: "Navbar",
+			code: `
+			<nav class="flex items-center justify-between p-4 bg-white rounded-lg shadow">
+				<div class="font-bold">{"Ripple"}</div>
+				<div class="space-x-4">
+					<a class="text-sm text-slate-600 hover:text-slate-900">{"Docs"}</a>
+					<a class="text-sm text-slate-600 hover:text-slate-900">{"Blog"}</a>
+					<button class="text-sm bg-blue-600 text-white px-3 py-1 rounded">{"Get started"}</button>
+				</div>
+			</nav>
+			`,
+		},
+
+		{
+			title: "Modal",
+			code: `
+			<div class="absolute w-full h-full inset-0 flex items-center justify-center">
+				<div class="absolute inset-0 bg-black/50" />
+				<div class="bg-white rounded-lg p-6 z-10 w-full max-w-md">
+					<h4 class="font-semibold mb-2">{"Confirm action"}</h4>
+					<p class="text-sm text-slate-600 mb-4">{"Are you sure you want to continue?"}</p>
+					<div class="flex justify-end gap-2">
+						<button class="px-3 py-1 rounded border">{"Cancel"}</button>
+						<button class="px-3 py-1 rounded bg-red-600 text-white">{"Confirm"}</button>
+					</div>
+				</div>
+			</div>
+			`,
+		},
+
+		{
+			title: "Profile Card",
+			code: `
+			<div class="bg-white rounded-lg p-4 shadow w-full">
+				<div class="flex items-center gap-3">
+					<div class="w-16 h-16 rounded-full bg-slate-200" />
+					<div>
+						<div class="font-semibold">{"Jane Doe"}</div>
+						<div class="text-sm text-slate-500">{"Frontend Engineer"}</div>
+					</div>
+				</div>
+				<div class="mt-3 text-sm text-slate-600">{"Loves building tiny UI libraries and live playgrounds."}</div>
+			</div>
+			`,
+		},
+
+		{
+			title: "List / Todo",
+			code: `
+			<div class="bg-white rounded-lg p-4 shadow w-full">
+				<h4 class="font-semibold mb-3">{"Todo"}</h4>
+				<ul class="space-y-2">
+					<li class="flex items-center justify-between">
+						<span>{"Write docs"}</span>
+						<button class="text-sm text-slate-500">{"Done"}</button>
+					</li>
+					<li class="flex items-center justify-between">
+						<span>{"Publish package"}</span>
+						<button class="text-sm text-slate-500">{"Done"}</button>
+					</li>
+				</ul>
+			</div>
+			`,
+		},
+
+		{
+			title: "Badge / Tag",
+			code: `
+			<div class="flex items-center gap-2">
+				<span class="inline-block bg-slate-200 text-slate-800 px-2 py-1 rounded text-sm">{"New"}</span>
+				<span class="inline-block bg-blue-600 text-white px-2 py-1 rounded text-sm">{"Pro"}</span>
+			</div>
+			`,
+		},
+
+		{
+			title: "Simple Dashboard",
+			code: `
+			<div class="grid grid-cols-3 gap-4">
+				<div class="bg-white rounded-lg p-4 shadow"> <div class="text-sm text-slate-500">{"Users"}</div> <div class="text-2xl font-bold">{"1,248"}</div> </div>
+				<div class="bg-white rounded-lg p-4 shadow"> <div class="text-sm text-slate-500">{"Sales"}</div> <div class="text-2xl font-bold">{"$12.4k"}</div> </div>
+				<div class="bg-white rounded-lg p-4 shadow"> <div class="text-sm text-slate-500">{"Errors"}</div> <div class="text-2xl font-bold text-red-600">{"3"}</div> </div>
+			</div>
+			`,
+		},
+	]
+
+	const component = track(list[0]);
+
+	<div class="h-screen bg-slate-900 text-white p-6">
+		<div class="max-w-7xl mx-auto grid grid-cols-4 gap-6 h-full">
+
+			<aside class="col-span-1 bg-slate-800 rounded-lg p-4 shadow-inner">
+				<h2 class="text-lg font-semibold mb-3">{"Playground"}</h2>
+				<p class="text-sm text-slate-400 mb-4">{"Choose an example to preview and edit."}</p>
+				<ul class="space-y-2">
+					for (let item of list) {
+						<li>
+							<button
+								onClick={e => @component = item}
+								class={@component === item ? 'w-full text-left px-3 py-2 rounded bg-blue-600 text-white transition' : 'w-full text-left px-3 py-2 rounded text-slate-200 hover:bg-slate-700 transition'}
+							>
+								{item.title}
+							</button>
+						</li>
+					}
+				</ul>
+			</aside>
+
+			
+			<main class="col-span-3 grid grid-rows-2 gap-4">
+				<LiveProvider code={@component.code} scope={{}} disabled>
+					<div class="bg-white text-black rounded-lg p-4 h-full overflow-auto shadow">
+						<div class="mb-2 text-sm text-slate-500">{"Preview"}</div>
+						<LivePreview class="min-h-60 relative" />
+					</div>
+
+					<div class="bg-slate-800 rounded-lg p-4 h-full overflow-auto shadow-inner">
+						<div class="mb-2 text-sm text-slate-400">{"Editor"}</div>
+						<LiveEditor class="w-full font-mono text-sm *:rounded-lg *:p-2 *:overflow-auto" />
+					</div>
+				</LiveProvider>
+			</main>
+
 		</div>
 	</div>
 }
