@@ -25,7 +25,25 @@ export component CodeEditor({ code, disabled, options = {}, ...editorProps }){
         });
     });
 
-    <div {ref n =>  @editorRef=untrack(() => n)} {...editorProps} 
+    const codeEditorRef = (node) => {
+        console.log("mounted");
+        let typingTimer;
+        const DONE_TYPING_INTERVAL = 500;
+        const onInput = () => {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                @code = node.textContent;
+            }, DONE_TYPING_INTERVAL);
+        }
+        node.addEventListener("input", onInput);
+        return () => {
+            console.log("unmounted");
+            node.removeEventListener("input", onInput);
+        }
+
+    }
+
+    <div {ref codeEditorRef} {...editorProps} 
         contenteditable={!@loading && !@disabled}>
         {html @editorContent}
     </div>

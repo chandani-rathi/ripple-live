@@ -1,18 +1,19 @@
-import type { Component } from "ripple";
-import { Context } from "ripple";
+import type { Component, Tracked } from 'ripple';
+import { Context } from 'ripple';
 
 type ContextValue = {
-  error?: string;
-  element?: Component | null;
-  code: string;
-  newCode?: string;
-  disabled: boolean;
-  theme?//: typeof themes.nightOwl;
-  onError(error: Error): string;
-  onChange(value: string): void;
+	error?: string;
+	element?: Component | null;
+	code: Tracked<string>;
+	scope: Record<string, any>;
+	newCode?: string;
+	disabled: boolean;
+	Component: Tracked<Component|unknown>;
+	theme?; //: typeof themes.nightOwl;
+	onError(error: Error): string | void;
+	onChange(value: string): void;
 };
-
 
 const LiveContext = new Context<ContextValue>({});
 
-export default LiveContext;
+export default LiveContext
